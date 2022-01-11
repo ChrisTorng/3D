@@ -1,9 +1,9 @@
 <!doctype html>
 <html lang="en">
   <head>
-    <title>&lt;model-viewer&gt; template</title>
+    <title>WebAR</title>
     <meta charset="utf-8">
-    <meta name="description" content="&lt;model-viewer&gt; template">
+    <meta name="description" content="WebAR">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link type="text/css" href="./styles.css" rel="stylesheet"/>
     <!-- OPTIONAL: The :focus-visible polyfill removes the focus ring for some input types -->
@@ -11,7 +11,7 @@
   </head>
   <body>
     <!-- <model-viewer> HTML element -->
-    <model-viewer bounds="tight" src="Joyce1.glb" ar ar-modes="scene-viewer webxr quick-look" camera-controls environment-image="neutral" poster="poster.webp" shadow-intensity="1" autoplay>
+    <model-viewer id="viewer" bounds="tight" ar ar-modes="scene-viewer webxr quick-look" camera-controls environment-image="neutral" poster="poster.webp" shadow-intensity="1" autoplay>
       <div class="progress-bar hide" slot="progress-bar">
           <div class="update-bar"></div>
       </div>
@@ -21,7 +21,31 @@
       <div id="ar-prompt">
           <img src="ar_hand_prompt.png">
       </div>
-    </model-viewer>  
+    </model-viewer>
+    <script>
+      const getQueryParams = (url) => {
+        let qParams = {};
+        // create a binding tag to use a property called search
+        let anchor = document.createElement('a');
+        // assign the href URL of the anchor tag
+        anchor.href = url;
+        // search property returns URL query string
+        let qStrings = anchor.search.substring(1);
+        let params = qStrings.split('&');
+        for (let i = 0; i < params.length; i++) {
+          let pair = params[i].split('=');
+            qParams[pair[0]] = decodeURIComponent(pair[1]);
+          }
+          return qParams;
+      };
+      let params = getQueryParams(location.href);
+      console.log(params);
+      console.log(params.glb);
+      let viewer = document.getElementById('viewer');
+      console.log(viewer);
+      viewer.src = params.glb + '.glb';
+      console.log(viewer.src);
+    </script>
     <script src="script.js"></script>
     <!-- Loads <model-viewer> for browsers: -->
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
