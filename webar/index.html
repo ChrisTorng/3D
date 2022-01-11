@@ -39,12 +39,8 @@
           return qParams;
       };
       let params = getQueryParams(location.href);
-      console.log(params);
-      console.log(params.glb);
       let viewer = document.getElementById('viewer');
-      console.log(viewer);
-      viewer.src = params.glb + '.glb';
-      console.log(viewer.src);
+      viewer.src = 'glb/' + params.glb + '.glb';
     </script>
     <script src="script.js"></script>
     <!-- Loads <model-viewer> for browsers: -->
