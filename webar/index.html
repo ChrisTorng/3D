@@ -11,7 +11,7 @@
   </head>
   <body>
     <!-- <model-viewer> HTML element -->
-    <model-viewer id="viewer" bounds="tight" ar ar-modes="scene-viewer webxr quick-look" camera-controls environment-image="neutral" poster="poster.webp" shadow-intensity="1" autoplay>
+    <model-viewer id="viewer" bounds="tight" ar ar-modes="scene-viewer webxr quick-look" camera-controls environment-image="neutral" shadow-intensity="1" autoplay>
       <div class="progress-bar hide" slot="progress-bar">
           <div class="update-bar"></div>
       </div>
@@ -22,26 +22,6 @@
           <img src="ar_hand_prompt.png">
       </div>
     </model-viewer>
-    <script>
-      const getQueryParams = (url) => {
-        let qParams = {};
-        // create a binding tag to use a property called search
-        let anchor = document.createElement('a');
-        // assign the href URL of the anchor tag
-        anchor.href = url;
-        // search property returns URL query string
-        let qStrings = anchor.search.substring(1);
-        let params = qStrings.split('&');
-        for (let i = 0; i < params.length; i++) {
-          let pair = params[i].split('=');
-            qParams[pair[0]] = decodeURIComponent(pair[1]);
-          }
-          return qParams;
-      };
-      let params = getQueryParams(location.href);
-      let viewer = document.getElementById('viewer');
-      viewer.src = 'glb/' + params.glb + '.glb';
-    </script>
     <script src="script.js"></script>
     <!-- Loads <model-viewer> for browsers: -->
     <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
